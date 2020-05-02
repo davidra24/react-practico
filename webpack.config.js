@@ -41,7 +41,14 @@ module.exports = {
       {
         test: /\.(png|svg|jpg|jpeg|gif|ico)$/,
         exclude: /node_modules/,
-        use: ['assets/[hash].[ext]'], // ?name=[name].[ext] is only necessary to preserve the original file name
+        use: [
+          {
+            loader: 'file-loader',
+            options: {
+              name: 'assets/[hash].[ext]',
+            },
+          },
+        ], // ?name=[name].[ext] is only necessary to preserve the original file name
       },
     ],
   },
