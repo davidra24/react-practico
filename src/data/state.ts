@@ -13,6 +13,8 @@ export interface video {
 }
 
 export interface state {
+  user: any;
+  playing: any;
   mylist: video[];
   trends: video[];
   originals: video[];

@@ -1,8 +1,10 @@
 import { useState, useEffect } from 'react';
-import { state } from '../model/state';
-
-export const useInitialState = (API) => {
+import { state } from '../data/state';
+const API = 'http://localhost:3000/initialState';
+export const useInitialState = () => {
   const [videos, setVideos] = useState<state>({
+    user: {},
+    playing: {},
     mylist: [],
     trends: [],
     originals: [],
