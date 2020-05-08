@@ -5,11 +5,16 @@ import userIcon from '../../assets/user-icon.png';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { gravatar } from '../../util/gravatar';
+import { logoutRequest } from '../../actions';
 
 const Head = (props: any) => {
-  const { user } = props;
+  const { user, logoutRequest } = props;
 
   const hasUser = Object.keys(user).length != 0;
+
+  const handleLogout = () => {
+    logoutRequest({});
+  };
 
   return (
     <div>
@@ -27,12 +32,22 @@ const Head = (props: any) => {
             <p>Perfil</p>
           </div>
           <ul>
-            <li>
-              <Link to='/login'>Iniciar Sesión</Link>
-            </li>
-            <li>
-              <Link to='/register'>Registrarse</Link>
-            </li>
+            {hasUser && (
+              <li>
+                <Link to='/'>{user.name}</Link>
+              </li>
+            )}
+            {hasUser ? (
+              <li>
+                <a href='#logout' onClick={handleLogout}>
+                  Cerrar Sesión
+                </a>
+              </li>
+            ) : (
+              <li>
+                <Link to='/login'>Iniciar Sesión</Link>
+              </li>
+            )}
           </ul>
         </div>
       </header>
@@ -46,4 +61,8 @@ const mapStateToProps = (state: any) => {
   };
 };
 
-export const Header = connect(mapStateToProps)(Head);
+const mapDispatchToProps = {
+  logoutRequest,
+};
+
+export const Header = connect(mapStateToProps, mapDispatchToProps)(Head);

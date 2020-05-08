@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './routes';
-import { createStore, applyMiddleware } from 'redux';
+import { createStore, applyMiddleware, compose } from 'redux';
 import reduxThunk from 'redux-thunk';
 import { Provider } from 'react-redux';
 import reducer from './reducer';
@@ -13,7 +13,12 @@ const user = {};
 const playing = {};
 const initalState: state = { ...initial, user, playing };
 
-const store = createStore(reducer, initalState, applyMiddleware(reduxThunk));
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+const store = createStore(
+  reducer,
+  initalState,
+  composeEnhancers(applyMiddleware(reduxThunk))
+);
 
 ReactDOM.render(
   <Provider store={store}>

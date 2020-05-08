@@ -4,6 +4,7 @@ import plus from '../../assets/plus-icon.png';
 import remove from '../../assets/remove.png';
 import { connect } from 'react-redux';
 import { setFavorite, deleteFavorite } from '../../actions';
+import { Link } from 'react-router-dom';
 
 const CarouselItem = (props: any) => {
   const { id, cover, title, year, contentRating, duration, isFavorite } = props;
@@ -21,11 +22,13 @@ const CarouselItem = (props: any) => {
       <img className='carousel-item__img' src={cover} alt={title} />
       <div className='carousel-item__details'>
         <div>
-          <img
-            className='carousel-item__details--img'
-            src={play}
-            alt='Play Icon'
-          />
+          <Link to={`/player/${id}`}>
+            <img
+              className='carousel-item__details--img'
+              src={play}
+              alt='Play Icon'
+            />
+          </Link>
           {isFavorite ? (
             <img
               className='carousel-item__details--img'

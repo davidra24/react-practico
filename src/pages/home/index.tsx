@@ -15,7 +15,7 @@ import reducer from '../../reducer';
 const Home = ({ mylist, trends, originals, email }: any) => {
   return (
     <>
-      <Search />
+      <Search isHome />
       {mylist.length > 0 && (
         <Categories title='Mi lista'>
           <Carousel>

@@ -1,4 +1,11 @@
-import { SET_FAVORITE, DELETE_FAVORITE, LOGIN_REQUEST } from '../types';
+import {
+  SET_FAVORITE,
+  DELETE_FAVORITE,
+  LOGIN_REQUEST,
+  LOGOUT_REQUEST,
+  REGISTER_REQUEST,
+  GET_VIDEO_SRC,
+} from '../types';
 import { Dispatch } from 'redux';
 import { video } from '../data/state';
 
@@ -31,5 +38,20 @@ export const deleteFavorite = (payload: any) => ({
 
 export const loginRequest = (payload: any) => ({
   type: LOGIN_REQUEST,
+  payload,
+});
+
+export const logoutRequest = (payload: any) => ({
+  type: LOGOUT_REQUEST,
+  payload,
+});
+
+export const registerRequest = (payload: any) => ({
+  type: REGISTER_REQUEST,
+  payload,
+});
+
+export const getVideoSrc = (payload: any) => ({
+  type: GET_VIDEO_SRC,
   payload,
 });

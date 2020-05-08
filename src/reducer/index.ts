@@ -1,6 +1,13 @@
 import { state } from '../data/state';
 import { initialState as initial } from '../api/initialState.json';
-import { SET_FAVORITE, DELETE_FAVORITE, LOGIN_REQUEST } from '../types';
+import {
+  SET_FAVORITE,
+  DELETE_FAVORITE,
+  LOGIN_REQUEST,
+  LOGOUT_REQUEST,
+  REGISTER_REQUEST,
+  GET_VIDEO_SRC,
+} from '../types';
 
 const user = {};
 const playing = {};
@@ -11,7 +18,10 @@ interface Action<T, P> {
   readonly payload?: P;
 }
 
-const reducer = (state: state, action: Action<string, any>): any => {
+const reducer = (
+  state: state = initalState,
+  action: Action<string, any>
+): any => {
   switch (action.type) {
     case SET_FAVORITE:
       return { ...state, mylist: [...state.mylist, action.payload] };
@@ -23,6 +33,17 @@ const reducer = (state: state, action: Action<string, any>): any => {
     case LOGIN_REQUEST:
       const { email } = action.payload;
       return { ...state, user: { email } };
+    case LOGOUT_REQUEST:
+      return { ...state, user: action.payload };
+    case REGISTER_REQUEST:
+      return { ...state, user: action.payload };
+    case GET_VIDEO_SRC:
+      return {
+        ...state,
+        playing:
+          state.trends.find((item) => item.id === Number(action.payload)) ||
+          state.originals.find((item) => item.id === Number(action.payload)),
+      };
     default:
       return state;
   }
